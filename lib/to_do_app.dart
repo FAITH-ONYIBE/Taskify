@@ -8,17 +8,42 @@ class ToDoApp extends StatefulWidget {
 }
 
 class _ToDoAppState extends State<ToDoApp> {
-  final TextEditingController controller = TextEditingController();
-  List task = [];
+  final TextEditingController faithbook = TextEditingController();
+  List tasks = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('TODO APP', style: TextStyle(color: Colors.white))),
+        title: Center(
+          child: Text('TODO APP', style: TextStyle(color: Colors.white)),
+        ),
         backgroundColor: const Color.fromARGB(255, 3, 73, 131),
       ),
-      body: TextField(),
+      body: Column(
+        children: [
+          TextField(
+            controller: faithbook,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                tasks.add(faithbook.text);
+                faithbook.clear();
+              });
+            },
+            child: Text('ADD'),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: tasks.length,
+              itemBuilder: (context, index) {
+                return ListTile(title: Text(tasks[index]));
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
