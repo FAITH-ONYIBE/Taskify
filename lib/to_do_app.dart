@@ -8,12 +8,17 @@ class ToDoApp extends StatefulWidget {
 }
 
 class _ToDoAppState extends State<ToDoApp> {
+  final TextEditingController controller = TextEditingController();
+  List task = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('TODOAPP', 
-      style: TextStyle(color: Colors.white),),
-      backgroundColor: Colors.black,),
+      appBar: AppBar(
+        title: Center(child: Text('TODO APP', style: TextStyle(color: Colors.white))),
+        backgroundColor: const Color.fromARGB(255, 3, 73, 131),
+      ),
+      body: TextField(),
     );
   }
 }
