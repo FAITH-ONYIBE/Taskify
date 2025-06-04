@@ -22,9 +22,7 @@ class _ToDoAppState extends State<ToDoApp> {
       ),
       body: Column(
         children: [
-          TextField(
-            controller: faithbook,
-          ),
+          TextField(controller: faithbook),
           ElevatedButton(
             onPressed: () {
               setState(() {
@@ -38,7 +36,14 @@ class _ToDoAppState extends State<ToDoApp> {
             child: ListView.builder(
               itemCount: tasks.length,
               itemBuilder: (context, index) {
-                return ListTile(title: Text(tasks[index]));
+                return ListTile(
+                  title: Text(tasks[index]),
+                  onTap: () {
+                    setState(() {
+                      tasks.removeAt(index);
+                    });
+                  },
+                );
               },
             ),
           ),
