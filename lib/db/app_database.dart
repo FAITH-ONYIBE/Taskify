@@ -6,10 +6,9 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 class AppDatabase {
   Database? _database;
 
-  // Constructor: Initialize database factory for Windows/Desktop
   AppDatabase() {
     sqfliteFfiInit();
-    databaseFactory = databaseFactoryFfi;
+    databaseFactory = databaseFactoryFfi; 
   }
 
   Future<Database> get database async {
@@ -28,7 +27,7 @@ class AppDatabase {
         options: OpenDatabaseOptions(
           version: 1,
           onCreate: (db, version) async {
-            // Users table
+           
             await db.execute('''
               CREATE TABLE users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,7 +37,7 @@ class AppDatabase {
               )
             ''');
 
-            // Todos table linked to user
+        
             await db.execute('''
               CREATE TABLE todos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -84,7 +83,7 @@ class AppDatabase {
     }
   }
 
-  // ---------------- USERS ----------------
+
 
   Future<int> registerUser(String name, String email, String password) async {
     final db = await database;
@@ -102,7 +101,7 @@ class AppDatabase {
     return await db.insert('users', {
       'name': name,
       'email': email,
-      'password': password, // ⚠️ store hashed in real apps
+      'password': password,
     });
   }
 
@@ -117,12 +116,12 @@ class AppDatabase {
     );
 
     if (res.isNotEmpty) {
-      return res.first; // return logged-in user
+      return res.first; 
     }
     return null;
   }
 
-  // ---------------- TODOS ----------------
+  
 
   Future<int> insertTodo(int userId, String title, String description) async {
     final db = await database;
